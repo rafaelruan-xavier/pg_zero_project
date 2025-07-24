@@ -7,13 +7,16 @@ from core.enums import HeroEnum
 from core.entities.Alien import Alien
 
 #---------- IMPORTS OF USE CASE PACKAGE ----------
-from application.use_cases.MoveCharacterUseCase import MoveCharacterUseCase
+from application.use_cases.MoveEnemyUseCase import MoveEnemyUseCase
+from application.use_cases.MoveHeroUseCase import MoveHeroUseCase
 
 #---------- IMPORTS OF SERVICES PACKAGE ----------
 from infrastructure.services.MovementService import MovementService
+from infrastructure.services.MovementEnemyService import MovementEnemyService
 
 #---------- IMPORTS OF PGZERO ----------
 from pgzero.actor import Actor
+from pgzero import clock
 
 
 #----------- CONFIG ----------
@@ -29,7 +32,7 @@ hero_actor_pgzero_instance = Actor(SpriteImageEnum.HERO_DEFAULT)
 
 alien1_instance = None
 alien1_movement_instance = None
-alien1_position_instance = CharacterPosition(800, 650)
+alien1_position_instance = CharacterPosition(WindowGameEnum.TOP_MIDLE_POSITION)
 alien1_actor_pgzero_instance = Actor(SpriteImageEnum.HERO_DEFAULT)
 
 #----------- IMPLEMENTATIONS -----------
@@ -39,16 +42,16 @@ hero_instance = Hero(
     HeroEnum.DEFAULT_LIFE, # 100
     hero_position_instance, 
     HeroEnum.SPEED) # 10
-hero_movement_instance = MoveCharacterUseCase(MovementService(hero_instance))
+hero_movement_instance = MoveHeroUseCase(MovementService(hero_instance))
 
 alien1_instance = Alien(
     alien1_actor_pgzero_instance,
     HeroEnum.NAME,
     HeroEnum.DEFAULT_LIFE,
     alien1_position_instance,
-    5
+    6
 )
-alien1_movement_instance = MoveCharacterUseCase(MovementService(alien1_instance))
+alien1_movement_instance = MoveEnemyUseCase(MovementEnemyService(alien1_instance))
 
 #---------- RUN -----------
 def draw():
@@ -58,4 +61,4 @@ def draw():
 
 def update():
     hero_movement_instance.execute(keyboard)
-    alien1_movement_instance.execute(keyboard)
+    alien1_movement_instance.execute(hero_position_instance)

@@ -1,7 +1,5 @@
-#------------ IMPORTS OF ENTITIES ------------
-from core.entities.Hero import Hero
 
-class ICharacterMovement():
+class ICharacterMovement:
 
     """Interface/Contract with the movement of character."""
 

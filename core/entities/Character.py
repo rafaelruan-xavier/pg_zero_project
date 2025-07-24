@@ -1,6 +1,9 @@
 #------------ IMPORTS OF ENTITIES ------------
 from core.entities.CharacterPosition import CharacterPosition
 
+#------------ IMPORTS OF ENUMS ------------
+from core.enums import WindowGameEnum
+
 #------------ IMPORTS OF PGZERO ------------
 from pgzero.actor import Actor
 
@@ -25,7 +28,7 @@ class Character:
         self.__life = life
         self.__character_actor_object = character_actor_object
         self.__character_position = character_position
-        self.__character_actor_object.pos = self.__character_position.get_character_position("x"), self.__character_position.get_character_position("y")
+        self.__character_actor_object.pos = self.__character_position.get_character_position(WindowGameEnum.AXLE_X), self.__character_position.get_character_position(WindowGameEnum.AXLE_Y)
         self.__speed = speed
     
     def get_name(self):
@@ -74,7 +77,7 @@ class Character:
 
         """Return the character position object (CharacterPosition)"""
 
-        return [self.__character_position.get_character_position("x"), self.__character_position.get_character_position("y")]
+        return [self.__character_position.get_character_position(WindowGameEnum.AXLE_X), self.__character_position.get_character_position(WindowGameEnum.AXLE_Y)]
     
     def set_position(self, axle: str, value: float):
 
@@ -88,8 +91,8 @@ class Character:
 
         self.__character_position.set_character_position(axle, value)
         self.__character_actor_object.pos = (
-            self.__character_position.get_character_position("x"),
-            self.__character_position.get_character_position("y")
+            self.__character_position.get_character_position(WindowGameEnum.AXLE_X),
+            self.__character_position.get_character_position(WindowGameEnum.AXLE_Y)
     )
         return None
     
