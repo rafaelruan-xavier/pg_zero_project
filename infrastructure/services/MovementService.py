@@ -2,6 +2,7 @@
 from core.entities.Character import Character
 from core.enums import WindowGameEnum
 
+
 #------------ IMPORTS OF REPOSITORY PACKAGE --------------
 from core.repository.ICharacterMovement import ICharacterMovement
 

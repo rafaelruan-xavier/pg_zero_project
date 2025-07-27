@@ -1,1 +1,0 @@
-HERO_DEFAULT = "shipbeige_manned.png"

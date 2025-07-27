@@ -1,3 +1,2 @@
 SPEED = 25
 NAME = "Zeca"
-DEFAULT_LIFE = 100

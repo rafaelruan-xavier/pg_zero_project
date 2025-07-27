@@ -64,7 +64,15 @@ class Character:
             value (float): New value for the life.
         """
 
-        self.__life = value
+        if (value >= 100):
+            self.__life = 100
+        elif (value > 0):
+            self.__life = min((self.__life + value), 100)
+        elif (value < 0):
+            self.__life = max((self.__life + value), 0)
+        else:
+            raise ValueError(f"ERROR IN set_life OF: {self.get_name()}")
+
         return None
     
     def get_actor(self):
